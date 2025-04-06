@@ -24,7 +24,6 @@ jobs:
           upx
           base-devel
           mingw-w64-i686-toolchain
-          mingw-w64-i686-gcc
           mingw-w64-i686-autotools
     - uses: dsaltares/fetch-gh-release-asset@master
       with:
@@ -35,6 +34,7 @@ jobs:
     - name: build-lib
       run: |
         cd subdir
+        export CXX=/mingw32/bin/g++.exe
         export LDFLAGS="-s -Wl,-no-undefined -Wl,-O1 -static"
         export CXXFLAGS="-O2 -march=i686 -fomit-frame-pointer -ftree-vectorize -pipe -DUNICODE"
         export PKG_CONFIG="pkg-config --static"
@@ -50,6 +50,7 @@ jobs:
       run: echo "tagname=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
     - name: build
       run: |
+        export CXX=/mingw32/bin/g++.exe
         export LDFLAGS="-s -Wl,-no-undefined -Wl,-O1 -static"
         export CXXFLAGS="-O2 -march=i686 -fomit-frame-pointer -ftree-vectorize -pipe -DUNICODE"
         export PKG_CONFIG="pkg-config --static"
