@@ -28,9 +28,11 @@ jobs:
       with:
         repo: 'libsidplayfp/libsidplayfp'
         regex: true
-        file: "libsidplayfp-.*\\.tar.gz"
+        file: "libsidplayfp-.*\\.tar\\.gz"
+        target: 'subdir/'
     - name: build-lib
       run: |
+        cd subdir
         ls -R
         tar -xf libsidplayfp*.tar.gz
         cd libsidplayfp*
