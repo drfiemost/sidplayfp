@@ -35,7 +35,7 @@ jobs:
         cd subdir
         ls -R
         tar -xf libsidplayfp*.tar.gz
-        cd libsidplayfp*
+        cd libsidplayfp*/.
         ./configure --disable-dependency-tracking --disable-shared --enable-static --without-gcrypt --enable-hardsid
         make && make install
     - uses: actions/checkout@v4
