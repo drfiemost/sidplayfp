@@ -40,7 +40,7 @@ jobs:
         export PKG_CONFIG="pkg-config --static"
         tar -xf libsidplayfp*.tar.gz
         cd libsidplayfp*/.
-        ./configure --disable-dependency-tracking --disable-shared --enable-static --without-gcrypt --enable-hardsid
+        ./configure --disable-dependency-tracking --disable-shared --enable-static --without-gcrypt --enable-hardsid || cat config.log
         make && make install
     - uses: actions/checkout@v4
       with:
