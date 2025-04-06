@@ -21,9 +21,10 @@ jobs:
         install: >-
           git
           zip
+          upx
           base-devel
           mingw-w64-x86_64-toolchain
-          mingw-w64-x86_64-upx
+          mingw-w64-x86_64-autotools
     - uses: dsaltares/fetch-gh-release-asset@master
       with:
         repo: 'libsidplayfp/libsidplayfp'
