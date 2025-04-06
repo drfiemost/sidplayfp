@@ -33,7 +33,6 @@ jobs:
     - name: build-lib
       run: |
         cd subdir
-        ls -R
         tar -xf libsidplayfp*.tar.gz
         cd libsidplayfp*/.
         ./configure --disable-dependency-tracking --disable-shared --enable-static --without-gcrypt --enable-hardsid
@@ -46,13 +45,15 @@ jobs:
       run: echo "tagname=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
     - name: build
       run: |
+        autoreconf -vfi
         ./configure --disable-dependency-tracking
         make
-        upx src/*.exe
+        mv src/*.exe .
+        upx *.exe
         pod2text doc/en/sidplayfp.ini.pod > sidplayfp.ini.txt
         pod2text doc/en/sidplayfp.pod > sidplayfp.txt
         pod2text doc/en/stilview.pod > stilview.txt
-        zip sidplayfp-${{ steps.get_tag_name.outputs.tagname }}.zip src/*.exe README AUTHORS *.txt
+        zip sidplayfp-${{ steps.get_tag_name.outputs.tagname }}.zip *.exe README AUTHORS *.txt
     - uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
