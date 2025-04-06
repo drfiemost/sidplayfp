@@ -55,7 +55,7 @@ jobs:
         pod2text doc/en/sidplayfp.ini.pod > sidplayfp.ini.txt
         pod2text doc/en/sidplayfp.pod > sidplayfp.txt
         pod2text doc/en/stilview.pod > stilview.txt
-        zip sidplayfp-${{ steps.get_tag_name.outputs.tagname }}.zip *.exe README AUTHORS *.txt
+        zip sidplayfp-w64-${{ steps.get_tag_name.outputs.tagname }}.zip *.exe README AUTHORS *.txt
     - uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
