@@ -17,9 +17,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - { sys: MINGW64, env: x86_64,      arch: x86_64-v2 }
+          - { sys: MINGW64, env: x86_64,      arch: x86-64-v2 }
           - { sys: MINGW32, env: i686,        arch: i686 }
-          - { sys: UCRT64,  env: ucrt-x86_64, arch: x86_64-v2 }
+          - { sys: UCRT64,  env: ucrt-x86_64, arch: x86-64-v3 }
     steps:
     - uses: msys2/setup-msys2@v2
       with:
@@ -68,11 +68,11 @@ jobs:
         pod2text doc/en/sidplayfp.ini.pod > sidplayfp.ini.txt
         pod2text doc/en/sidplayfp.pod > sidplayfp.txt
         pod2text doc/en/stilview.pod > stilview.txt
-        zip sidplayfp--${{matrix.env}}-${{ steps.get_tag_name.outputs.tagname }}.zip *.exe README AUTHORS *.txt
+        zip sidplayfp--${{matrix.arch}}-${{ steps.get_tag_name.outputs.tagname }}.zip *.exe README AUTHORS *.txt
     - uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: sidplayfp-${{matrix.env}}-${{ steps.get_tag_name.outputs.tagname }}.zip
+        file: sidplayfp-${{matrix.arch}}-${{ steps.get_tag_name.outputs.tagname }}.zip
         tag: ${{ github.ref }}
         file_glob: true
         overwrite: true
