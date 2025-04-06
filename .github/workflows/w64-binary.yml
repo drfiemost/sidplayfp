@@ -24,12 +24,15 @@ jobs:
           base-devel
           mingw-w64-x86_64-toolchain
           mingw-w64-x86_64-upx
-    - uses: pozetroninc/github-action-get-latest-release@v0.8.0
+    - uses: dsaltares/fetch-gh-release-asset@master
       with:
-        owner: libsidplayfp
-        repo: libsidplayfp
+        repo: 'libsidplayfp/libsidplayfp'
+        regex: true
+        file: "libsidplayfp-.*\\.tar.gz"
+        target: 'subdir/'
     - name: build-lib
       run: |
+        ls -R
         tar -xf libsidplayfp*.tar.gz
         cd libsidplayfp*
         ./configure --disable-dependency-tracking --disable-shared --enable-static --without-gcrypt --enable-hardsid
