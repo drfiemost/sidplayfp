@@ -50,6 +50,7 @@ jobs:
         ./configure --disable-dependency-tracking
         make
         mv src/*.exe .
+        strip *.exe
         upx *.exe
         pod2text doc/en/sidplayfp.ini.pod > sidplayfp.ini.txt
         pod2text doc/en/sidplayfp.pod > sidplayfp.txt
