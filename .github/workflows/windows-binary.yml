@@ -37,6 +37,7 @@ jobs:
         repo: 'libsidplayfp/libsidplayfp'
         regex: true
         file: "libsidplayfp-.*\\.tar\\.gz"
+        version: 'tags/v2.16.0rc'
         target: 'subdir/'
     - name: build-lib
       run: |
